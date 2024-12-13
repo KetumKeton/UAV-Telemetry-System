@@ -16,13 +16,6 @@ public class telemetrymanager : MonoBehaviour
     private string logContent = ""; // Logları saklamak için değişken
     public ScrollRect scrollRect; // Scroll View için referans
 
-    // Yeni bir log eklemek için bu metodu çağırabilirsiniz
-   /* public void AddLog(string log)
-    {
-        logContent += log + "\n"; // Yeni log eklenir
-       // logText.text = logContent; 
-        textMeshPro.text = logContent;
-    }*/
 
      void OnEnable()
     {
@@ -39,9 +32,9 @@ public class telemetrymanager : MonoBehaviour
         logContent += logString + "\n";
         if (textMeshPro.text != null) //if (logText != null)
         {
-            //logText.text = logContent; // Text içeriğini güncelle
+            
             textMeshPro.text = logContent;
-           // tryGetComponent();
+       
             ScrollToBottom(); // En alta kaydır
         }
     }
