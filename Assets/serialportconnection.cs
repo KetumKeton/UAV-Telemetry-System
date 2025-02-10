@@ -35,10 +35,10 @@ using System;
 using UnityEngine.Networking;
 public class serialportconnection : MonoBehaviour
 {
-    public string streamUrl = "http://<raspberrypi-ip>:<port>/stream";
-    private bool isStreaming = false;
+   // public string streamUrl = "http://<raspberrypi-ip>:<port>/stream";
+  //  private bool isStreaming = false;
     public RawImage rawImage;
-    private Texture2D texture;
+  //  private Texture2D texture;
     public Dropdown comportd;
     public Dropdown baudrated;
     public GameObject baglandi;
@@ -51,9 +51,9 @@ public class serialportconnection : MonoBehaviour
     string receivedData = "";
     void Start()
     {
-        texture = new Texture2D(2, 2);
-        rawImage.texture = texture;
-        StartCoroutine(GetVideoStream());
+        //texture = new Texture2D(2, 2);
+        //rawImage.texture = texture;
+        //StartCoroutine(GetVideoStream());
 
         flag1 = false;
 
@@ -76,7 +76,7 @@ public class serialportconnection : MonoBehaviour
         }
     }
 
-        IEnumerator GetVideoStream()
+       /* IEnumerator GetVideoStream()
     {
         isStreaming = true;
         while (isStreaming)
@@ -88,7 +88,7 @@ public class serialportconnection : MonoBehaviour
                 rawImage.texture = texture; // RawImage'e aktar
             }
         }
-    }
+    }*/
 
         public void Baglantibaslat(){
         try
@@ -127,6 +127,7 @@ void SeriOku() //mavlink v1 okuma
                 buffer[0]= receivedByte;
                 byte payloadLength = (byte)stream.ReadByte();
                 buffer[1]=payloadLength;
+                Debug.Log(payloadLength);
                 // Payload uzunluğu kadar veriyi oku
                 byte[] payloadData = new byte[payloadLength + 6];
                 int bytesRead = 0;
@@ -139,7 +140,7 @@ void SeriOku() //mavlink v1 okuma
 
                 receivedData = BitConverter.ToString(payloadData);
                 PlayerPrefs.SetString("receivedDataGLB", receivedData);
-
+                Debug.Log(payloadData);
                 // Debug log için
                 Debug.Log("Alınan Veri GLB: " + receivedData);
                 break;
@@ -180,15 +181,6 @@ void SeriOku() //mavlink v1 okuma
             Debug.Log("sifrealindi");
             PlayerPrefs.SetInt("verialindi",1);
             stream.Write("O");
-            
-        }
-
-        if(PlayerPrefs.GetString("receivedDataGLB").Trim() == "P")
-        {
-           PlayerPrefs.DeleteKey("receivedDataGLB");
-           PlayerPrefs.SetInt("player2",1);
-           Debug.Log("player2 set edildi");
-           stream.Write("O");
         }
      }
 
@@ -211,7 +203,7 @@ void SeriOku() //mavlink v1 okuma
             Debug.Log("Seri baglanti kapatildi.");
         }
 
-        isStreaming = false;
+       // isStreaming = false;
 
     }
 
