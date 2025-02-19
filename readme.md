@@ -46,7 +46,3 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to submit **pull requests** or open **issues**.
-
----
-
-You can update placeholders (like your Unity version or GitHub username) before uploading. Let me know if you need any modifications! 🚀
