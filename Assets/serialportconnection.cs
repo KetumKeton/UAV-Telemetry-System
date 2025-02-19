@@ -109,7 +109,9 @@ public class serialportconnection : MonoBehaviour
            PlayerPrefs.SetString("seribaglanti","0"); 
         }
         }
-
+        public void StreamC(){
+            stream.Close();
+        }
 void SeriOku() //mavlink v1 okuma 
 {
     try
