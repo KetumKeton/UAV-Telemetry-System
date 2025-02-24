@@ -11,11 +11,13 @@ public class telemetrymanager : MonoBehaviour
 {
     public GameObject LogMenu;
     public GameObject SettingsMenu;
-    public TextMeshProUGUI textMeshPro;
+    public TextMeshProUGUI textMeshPro; //1.Scroll view yazısı
+
+    public TextMeshProUGUI textMeshPro2;//2.Scroll view yazısı
    //public Text logText; // UI Text objesi 
     private string logContent = ""; // Logları saklamak için değişken
     public ScrollRect scrollRect; // Scroll View için referans
-
+    public ScrollRect scrollRect2;  //menudeki log window
 
      void OnEnable()
     {
@@ -34,7 +36,7 @@ public class telemetrymanager : MonoBehaviour
         {
             
             textMeshPro.text = logContent;
-       
+            textMeshPro2.text = logContent;
             ScrollToBottom(); // En alta kaydır
         }
     }
@@ -44,6 +46,7 @@ public class telemetrymanager : MonoBehaviour
         // Scroll View'ı en alt pozisyona getir
         Canvas.ForceUpdateCanvases(); // UI güncellemesini zorla
         scrollRect.verticalNormalizedPosition = 0f;
+        scrollRect2.verticalNormalizedPosition = 0f;
     }
 
     void Start()
