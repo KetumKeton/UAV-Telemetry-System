@@ -33,11 +33,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Networking;
+using static MAVLink;
 public class serialportconnection : MonoBehaviour
 {
    // public string streamUrl = "http://<raspberrypi-ip>:<port>/stream";
   //  private bool isStreaming = false;
-    public RawImage rawImage;
+   // public RawImage rawImage;
   //  private Texture2D texture;
     public Dropdown comportd;
     public Dropdown baudrated;

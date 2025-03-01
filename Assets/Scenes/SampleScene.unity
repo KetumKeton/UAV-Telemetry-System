@@ -4051,6 +4051,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664916337}
+  - component: {fileID: 664916340}
   - component: {fileID: 664916335}
   - component: {fileID: 664916338}
   - component: {fileID: 664916339}
@@ -4068,12 +4069,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664916334}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c1d3d83056a96d43ad7e5c0adade9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawImage: {fileID: 0}
   comportd: {fileID: 487520879}
   baudrated: {fileID: 684023087}
   baglandi: {fileID: 1829217211}
@@ -4140,6 +4140,23 @@ MonoBehaviour:
   Velocityllimit: {fileID: 1955381110}
   Altitudehlimit: {fileID: 1771764773}
   Altitudellimit: {fileID: 197855823}
+--- !u!114 &664916340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664916334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56973549af61b84882195cb44c701eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comportd: {fileID: 487520879}
+  baudrated: {fileID: 684023087}
+  baglandi: {fileID: 1829217211}
+  baglanmadi: {fileID: 1418098382}
+  comptext: {fileID: 573764560}
 --- !u!1 &665096241
 GameObject:
   m_ObjectHideFlags: 0
@@ -10905,7 +10922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1839250958
 Transform:
   m_ObjectHideFlags: 0
