@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
-
+//namespace MAVLink{
 public partial class MAVLink
 {
-    public const string MAVLINK_BUILD_DATE = "Mon Feb 24 2025";
+    public const string MAVLINK_BUILD_DATE = "Wed Mar 05 2025";
     public const string MAVLINK_WIRE_PROTOCOL_VERSION = "1.0";
     public const int MAVLINK_MAX_PAYLOAD_LEN = 255;
 
@@ -1932,11 +1932,11 @@ public partial class MAVLink
         ///<summary> Fence return point (there can only be one such point in a geofence definition). If rally points are supported they should be used instead. |Reserved| Reserved| Reserved| Reserved| Latitude| Longitude| Altitude|  </summary>
         [Description("Fence return point (there can only be one such point in a geofence definition). If rally points are supported they should be used instead.")]
         FENCE_RETURN_POINT=5000, 
-        ///<summary> Fence vertex for an inclusion polygon (the polygon must not be self-intersecting). The vehicle must stay within this area. Minimum of 3 vertices required.          |Polygon vertex count| Vehicle must be inside ALL inclusion zones in a single group, vehicle must be inside at least one group, must be the same for all points in each polygon| Reserved| Reserved| Latitude| Longitude| Reserved|  </summary>
-        [Description("Fence vertex for an inclusion polygon (the polygon must not be self-intersecting). The vehicle must stay within this area. Minimum of 3 vertices required.         ")]
+        ///<summary> Fence vertex for an inclusion polygon (the polygon must not be self-intersecting). The vehicle must stay within this area. Minimum of 3 vertices required.           The vertices for a polygon must be sent sequentially, each with param1 set to the total number of vertices in the polygon.          |Polygon vertex count. This is the number of vertices in the current polygon (all vertices will have the same number).| Vehicle must be inside ALL inclusion zones in a single group, vehicle must be inside at least one group, must be the same for all points in each polygon| Reserved| Reserved| Latitude| Longitude| Reserved|  </summary>
+        [Description("Fence vertex for an inclusion polygon (the polygon must not be self-intersecting). The vehicle must stay within this area. Minimum of 3 vertices required.           The vertices for a polygon must be sent sequentially, each with param1 set to the total number of vertices in the polygon.         ")]
         FENCE_POLYGON_VERTEX_INCLUSION=5001, 
-        ///<summary> Fence vertex for an exclusion polygon (the polygon must not be self-intersecting). The vehicle must stay outside this area. Minimum of 3 vertices required.          |Polygon vertex count| Reserved| Reserved| Reserved| Latitude| Longitude| Reserved|  </summary>
-        [Description("Fence vertex for an exclusion polygon (the polygon must not be self-intersecting). The vehicle must stay outside this area. Minimum of 3 vertices required.         ")]
+        ///<summary> Fence vertex for an exclusion polygon (the polygon must not be self-intersecting). The vehicle must stay outside this area. Minimum of 3 vertices required.           The vertices for a polygon must be sent sequentially, each with param1 set to the total number of vertices in the polygon.                          |Polygon vertex count. This is the number of vertices in the current polygon (all vertices will have the same number).| Reserved| Reserved| Reserved| Latitude| Longitude| Reserved|  </summary>
+        [Description("Fence vertex for an exclusion polygon (the polygon must not be self-intersecting). The vehicle must stay outside this area. Minimum of 3 vertices required.           The vertices for a polygon must be sent sequentially, each with param1 set to the total number of vertices in the polygon.                         ")]
         FENCE_POLYGON_VERTEX_EXCLUSION=5002, 
         ///<summary> Circular fence area. The vehicle must stay inside this area.          |Radius.| Vehicle must be inside ALL inclusion zones in a single group, vehicle must be inside at least one group| Reserved| Reserved| Latitude| Longitude| Reserved|  </summary>
         [Description("Circular fence area. The vehicle must stay inside this area.         ")]
@@ -5171,6 +5171,9 @@ public partial class MAVLink
         ///<summary> If set, this mode should not be added to the list of selectable modes.           The mode might still be selected by the FC directly (for example as part of a failsafe).          | </summary>
         [Description("If set, this mode should not be added to the list of selectable modes.           The mode might still be selected by the FC directly (for example as part of a failsafe).         ")]
         NOT_USER_SELECTABLE=2, 
+        ///<summary> If set, this mode is automatically controlled (it may use but does not require a manual controller).           If unset the mode is a assumed to require user input (be a manual mode).          | </summary>
+        [Description("If set, this mode is automatically controlled (it may use but does not require a manual controller).           If unset the mode is a assumed to require user input (be a manual mode).         ")]
+        AUTO_MODE=4, 
         
     };
     
@@ -5916,15 +5919,15 @@ public partial class MAVLink
               this.battery_remaining = battery_remaining;
             
         }
-        /// <summary>Bitmap showing which onboard controllers and sensors are present. Value of 0: not present. Value of 1: present. MAV_SYS_STATUS_SENSOR  bitmask</summary>
+        /// <summary>Bitmap showing which onboard controllers and sensors are present. Value of 0: not present. Value of 1: present. MAV_SYS_STATUS_SENSOR  </summary>
         [Units("")]
         [Description("Bitmap showing which onboard controllers and sensors are present. Value of 0: not present. Value of 1: present.")]
         public  /*MAV_SYS_STATUS_SENSOR*/uint onboard_control_sensors_present;
-            /// <summary>Bitmap showing which onboard controllers and sensors are enabled:  Value of 0: not enabled. Value of 1: enabled. MAV_SYS_STATUS_SENSOR  bitmask</summary>
+            /// <summary>Bitmap showing which onboard controllers and sensors are enabled:  Value of 0: not enabled. Value of 1: enabled. MAV_SYS_STATUS_SENSOR  </summary>
         [Units("")]
         [Description("Bitmap showing which onboard controllers and sensors are enabled:  Value of 0: not enabled. Value of 1: enabled.")]
         public  /*MAV_SYS_STATUS_SENSOR*/uint onboard_control_sensors_enabled;
-            /// <summary>Bitmap showing which onboard controllers and sensors have an error (or are operational). Value of 0: error. Value of 1: healthy. MAV_SYS_STATUS_SENSOR  bitmask</summary>
+            /// <summary>Bitmap showing which onboard controllers and sensors have an error (or are operational). Value of 0: error. Value of 1: healthy. MAV_SYS_STATUS_SENSOR  </summary>
         [Units("")]
         [Description("Bitmap showing which onboard controllers and sensors have an error (or are operational). Value of 0: error. Value of 1: healthy.")]
         public  /*MAV_SYS_STATUS_SENSOR*/uint onboard_control_sensors_health;
@@ -8599,7 +8602,7 @@ public partial class MAVLink
         [Units("")]
         [Description("Component ID")]
         public  byte target_component;
-            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. ATTITUDE_TARGET_TYPEMASK  bitmask</summary>
+            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. ATTITUDE_TARGET_TYPEMASK  </summary>
         [Units("")]
         [Description("Bitmap to indicate which dimensions should be ignored by the vehicle.")]
         public  /*ATTITUDE_TARGET_TYPEMASK*/byte type_mask;
@@ -8648,7 +8651,7 @@ public partial class MAVLink
         [Units("")]
         [Description("Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)")]
         public  float thrust;
-            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. ATTITUDE_TARGET_TYPEMASK  bitmask</summary>
+            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. ATTITUDE_TARGET_TYPEMASK  </summary>
         [Units("")]
         [Description("Bitmap to indicate which dimensions should be ignored by the vehicle.")]
         public  /*ATTITUDE_TARGET_TYPEMASK*/byte type_mask;
@@ -8729,7 +8732,7 @@ public partial class MAVLink
         [Units("[rad/s]")]
         [Description("yaw rate setpoint")]
         public  float yaw_rate;
-            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  bitmask</summary>
+            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  </summary>
         [Units("")]
         [Description("Bitmap to indicate which dimensions should be ignored by the vehicle.")]
         public  /*POSITION_TARGET_TYPEMASK*/ushort type_mask;
@@ -8820,7 +8823,7 @@ public partial class MAVLink
         [Units("[rad/s]")]
         [Description("yaw rate setpoint")]
         public  float yaw_rate;
-            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  bitmask</summary>
+            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  </summary>
         [Units("")]
         [Description("Bitmap to indicate which dimensions should be ignored by the vehicle.")]
         public  /*POSITION_TARGET_TYPEMASK*/ushort type_mask;
@@ -8905,7 +8908,7 @@ public partial class MAVLink
         [Units("[rad/s]")]
         [Description("yaw rate setpoint")]
         public  float yaw_rate;
-            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  bitmask</summary>
+            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  </summary>
         [Units("")]
         [Description("Bitmap to indicate which dimensions should be ignored by the vehicle.")]
         public  /*POSITION_TARGET_TYPEMASK*/ushort type_mask;
@@ -8996,7 +8999,7 @@ public partial class MAVLink
         [Units("[rad/s]")]
         [Description("yaw rate setpoint")]
         public  float yaw_rate;
-            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  bitmask</summary>
+            /// <summary>Bitmap to indicate which dimensions should be ignored by the vehicle. POSITION_TARGET_TYPEMASK  </summary>
         [Units("")]
         [Description("Bitmap to indicate which dimensions should be ignored by the vehicle.")]
         public  /*POSITION_TARGET_TYPEMASK*/ushort type_mask;
@@ -9317,7 +9320,7 @@ public partial class MAVLink
         [Units("[us]")]
         [Description("Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.")]
         public  ulong time_usec;
-            /// <summary>Flags as bitfield, 1: indicate simulation using lockstep.   bitmask</summary>
+            /// <summary>Flags as bitfield, 1: indicate simulation using lockstep.   </summary>
         [Units("")]
         [Description("Flags as bitfield, 1: indicate simulation using lockstep.")]
         public  ulong flags;
@@ -9326,7 +9329,7 @@ public partial class MAVLink
         [Description("Control outputs -1 .. 1. Channel assignment depends on the simulated hardware.")]
         [MarshalAs(UnmanagedType.ByValArray,SizeConst=16)]
 		public float[] controls;
-            /// <summary>System mode. Includes arming state. MAV_MODE_FLAG  bitmask</summary>
+            /// <summary>System mode. Includes arming state. MAV_MODE_FLAG  </summary>
         [Units("")]
         [Description("System mode. Includes arming state.")]
         public  /*MAV_MODE_FLAG*/byte mode;
@@ -9644,7 +9647,7 @@ public partial class MAVLink
         [Units("[degC]")]
         [Description("Temperature")]
         public  float temperature;
-            /// <summary>Bitmap for fields that have updated since last message HIGHRES_IMU_UPDATED_FLAGS  bitmask</summary>
+            /// <summary>Bitmap for fields that have updated since last message HIGHRES_IMU_UPDATED_FLAGS  </summary>
         [Units("")]
         [Description("Bitmap for fields that have updated since last message")]
         public  /*HIGHRES_IMU_UPDATED_FLAGS*/ushort fields_updated;
@@ -9805,7 +9808,7 @@ public partial class MAVLink
         [Units("[degC]")]
         [Description("Temperature")]
         public  float temperature;
-            /// <summary>Bitmap for fields that have updated since last message HIL_SENSOR_UPDATED_FLAGS  bitmask</summary>
+            /// <summary>Bitmap for fields that have updated since last message HIL_SENSOR_UPDATED_FLAGS  </summary>
         [Units("")]
         [Description("Bitmap for fields that have updated since last message")]
         public  /*HIL_SENSOR_UPDATED_FLAGS*/uint fields_updated;
@@ -10683,7 +10686,7 @@ public partial class MAVLink
         [Units("[mV]")]
         [Description("Servo rail voltage.")]
         public  ushort Vservo;
-            /// <summary>Bitmap of power supply status flags. MAV_POWER_STATUS  bitmask</summary>
+            /// <summary>Bitmap of power supply status flags. MAV_POWER_STATUS  </summary>
         [Units("")]
         [Description("Bitmap of power supply status flags.")]
         public  /*MAV_POWER_STATUS*/ushort flags;
@@ -10718,7 +10721,7 @@ public partial class MAVLink
         [Units("")]
         [Description("Serial control device type.")]
         public  /*SERIAL_CONTROL_DEV*/byte device;
-            /// <summary>Bitmap of serial control flags. SERIAL_CONTROL_FLAG  bitmask</summary>
+            /// <summary>Bitmap of serial control flags. SERIAL_CONTROL_FLAG  </summary>
         [Units("")]
         [Description("Bitmap of serial control flags.")]
         public  /*SERIAL_CONTROL_FLAG*/byte flags;
@@ -11092,7 +11095,7 @@ public partial class MAVLink
               this.grid_spacing = grid_spacing;
             
         }
-        /// <summary>Bitmask of requested 4x4 grids (row major 8x7 array of grids, 56 bits)   bitmask</summary>
+        /// <summary>Bitmask of requested 4x4 grids (row major 8x7 array of grids, 56 bits)   </summary>
         [Units("")]
         [Description("Bitmask of requested 4x4 grids (row major 8x7 array of grids, 56 bits)")]
         public  ulong mask;
@@ -11736,7 +11739,7 @@ public partial class MAVLink
               this.os_custom_version = os_custom_version;
             
         }
-        /// <summary>Bitmap of capabilities MAV_PROTOCOL_CAPABILITY  bitmask</summary>
+        /// <summary>Bitmap of capabilities MAV_PROTOCOL_CAPABILITY  </summary>
         [Units("")]
         [Description("Bitmap of capabilities")]
         public  /*MAV_PROTOCOL_CAPABILITY*/ulong capabilities;
@@ -11940,7 +11943,7 @@ public partial class MAVLink
         [Units("")]
         [Description("Compass being calibrated.")]
         public  byte compass_id;
-            /// <summary>Bitmask of compasses being calibrated.   bitmask</summary>
+            /// <summary>Bitmask of compasses being calibrated.   </summary>
         [Units("")]
         [Description("Bitmask of compasses being calibrated.")]
         public  byte cal_mask;
@@ -12109,7 +12112,7 @@ public partial class MAVLink
         [Units("[m]")]
         [Description("Vertical position 1-STD accuracy relative to the EKF local origin")]
         public  float pos_vert_accuracy;
-            /// <summary>Bitmap indicating which EKF outputs are valid. ESTIMATOR_STATUS_FLAGS  bitmask</summary>
+            /// <summary>Bitmap indicating which EKF outputs are valid. ESTIMATOR_STATUS_FLAGS  </summary>
         [Units("")]
         [Description("Bitmap indicating which EKF outputs are valid.")]
         public  /*ESTIMATOR_STATUS_FLAGS*/ushort flags;
@@ -12254,7 +12257,7 @@ public partial class MAVLink
         [Units("[m]")]
         [Description("GPS vertical accuracy")]
         public  float vert_accuracy;
-            /// <summary>Bitmap indicating which GPS input flags fields to ignore.  All other fields must be provided. GPS_INPUT_IGNORE_FLAGS  bitmask</summary>
+            /// <summary>Bitmap indicating which GPS input flags fields to ignore.  All other fields must be provided. GPS_INPUT_IGNORE_FLAGS  </summary>
         [Units("")]
         [Description("Bitmap indicating which GPS input flags fields to ignore.  All other fields must be provided.")]
         public  /*GPS_INPUT_IGNORE_FLAGS*/ushort ignore_flags;
@@ -12340,7 +12343,7 @@ public partial class MAVLink
               this.wp_num = wp_num;
             
         }
-        /// <summary>A bitfield for use for autopilot-specific flags.   bitmask</summary>
+        /// <summary>A bitfield for use for autopilot-specific flags.   </summary>
         [Units("")]
         [Description("A bitfield for use for autopilot-specific flags.")]
         public  uint custom_mode;
@@ -12380,7 +12383,7 @@ public partial class MAVLink
         [Units("[m]")]
         [Description("distance to target")]
         public  ushort wp_distance;
-            /// <summary>Bitmap of enabled system modes. MAV_MODE_FLAG  bitmask</summary>
+            /// <summary>Bitmap of enabled system modes. MAV_MODE_FLAG  </summary>
         [Units("")]
         [Description("Bitmap of enabled system modes.")]
         public  /*MAV_MODE_FLAG*/byte base_mode;
@@ -12488,7 +12491,7 @@ public partial class MAVLink
         [Units("[degE7]")]
         [Description("Longitude")]
         public  int longitude;
-            /// <summary>A bitfield for use for autopilot-specific flags (2 byte version).   bitmask</summary>
+            /// <summary>A bitfield for use for autopilot-specific flags (2 byte version).   </summary>
         [Units("")]
         [Description("A bitfield for use for autopilot-specific flags (2 byte version).")]
         public  ushort custom_mode;
@@ -12508,7 +12511,7 @@ public partial class MAVLink
         [Units("")]
         [Description("Current waypoint number")]
         public  ushort wp_num;
-            /// <summary>Bitmap of failure flags. HL_FAILURE_FLAG  bitmask</summary>
+            /// <summary>Bitmap of failure flags. HL_FAILURE_FLAG  </summary>
         [Units("")]
         [Description("Bitmap of failure flags.")]
         public  /*HL_FAILURE_FLAG*/ushort failure_flags;
@@ -12865,7 +12868,7 @@ public partial class MAVLink
         [Units("[cm/s]")]
         [Description("The vertical velocity. Positive is up")]
         public  short ver_velocity;
-            /// <summary>Bitmap to indicate various statuses including valid data fields ADSB_FLAGS  bitmask</summary>
+            /// <summary>Bitmap to indicate various statuses including valid data fields ADSB_FLAGS  </summary>
         [Units("")]
         [Description("Bitmap to indicate various statuses including valid data fields")]
         public  /*ADSB_FLAGS*/ushort flags;
@@ -13207,3 +13210,4 @@ public partial class MAVLink
     };
 
 }
+//}

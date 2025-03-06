@@ -62,7 +62,7 @@ public class Limits : MonoBehaviour
             }
             else
             {
-                if(Voltagealert = false){
+                if(Voltagealert == false){
                 VoltageText.color = Color.red;
                 Debug.Log("Voltaj Sınırı Aşıldı Değer:" + textValueVoltage);
                 Voltagealert = true;
@@ -85,7 +85,7 @@ public class Limits : MonoBehaviour
             }
             else
             {
-                if (Currentalert = false){
+                if (Currentalert == false){
                 CurrentText.color = Color.red;
                 Debug.Log("Akım Sınırı Aşıldı Değer:" + textValueCurrent);
                 Currentalert = true;
@@ -108,7 +108,7 @@ public class Limits : MonoBehaviour
             }
             else
             {
-                if(Velocityalert = false){
+                if(Velocityalert == false){
                 VelocityText.color = Color.red;
                 Debug.Log("Hız Sınırı Aşıldı Değer:" + textValueVelocity);
                 Velocityalert = true;
@@ -165,6 +165,13 @@ public class Limits : MonoBehaviour
             AltitudeText.color = Color.red;
         }
 
+
+    
+    VelocityText.text = PlayerPrefs.GetString("speed");
+    AltitudeText.text = PlayerPrefs.GetString("altitude");
+    Baterytext.text = PlayerPrefs.GetString("battery");
+    VoltageText.text = PlayerPrefs.GetString("voltage");
+    CurrentText.text = PlayerPrefs.GetString("current");
 
     }
 }
