@@ -33,7 +33,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Networking;
-using static MAVLink;
+//using static MAVLink;
 public class serialportconnection : MonoBehaviour
 {
    // public string streamUrl = "http://<raspberrypi-ip>:<port>/stream";

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
-//namespace MAVLink{
+
 public partial class MAVLink
 {
     public const string MAVLINK_BUILD_DATE = "Wed Mar 05 2025";
@@ -13210,4 +13210,3 @@ public partial class MAVLink
     };
 
 }
-//}
