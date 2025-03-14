@@ -64,8 +64,10 @@ public class MAVLinkReceiver : MonoBehaviour
         stream.DataBits = 8;
         stream.StopBits = StopBits.One;
         stream.Handshake = Handshake.None;
-        stream.ReadTimeout = 1000;
-        stream.WriteTimeout = 100;
+        stream.ReadTimeout = 5000;
+        stream.WriteTimeout = 300;
+        stream.DtrEnable = true;
+        stream.RtsEnable = true;
 
         if (stream.IsOpen)
         {
@@ -112,7 +114,7 @@ public class MAVLinkReceiver : MonoBehaviour
                 //Debug.Log("Buffer içeriği: " + BitConverter.ToString(buffer));
                 //Debug.Log("Okunan bayt sayısı: " + bytesRead);
                 byte[] testV1 = new byte[] { 0xFE, 0x09, 0x01, 0x01, 0x01, 0x00, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0xE1, 0xB7 };//FE 09 01 01 01 00 02 03 04 05 06 07 08 09 E8 D3
-                byte[] testV2 = new byte[] { 0xFD, 0x09, 0x00, 0x01, 0x01, 0x01, 0x00, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x99, 0x99 };
+                byte[] testV2 = new byte[] { 0xFD, 0x09, 0x00, 0x01, 0x01, 0x01, 0x00, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x99, 0x99 };//V2 geçersiz
                 byte[] testData = new byte[] { 
                                             0xFE, // STX (MAVLink v1)
                                             0x09, // Payload uzunluğu
@@ -124,7 +126,7 @@ public class MAVLinkReceiver : MonoBehaviour
                                             0xE1, 0xB7 // CRC (little-endian: 0xB7E1)
                                             };
                 
-            using (MemoryStream ms = new MemoryStream(testData))
+            using (MemoryStream ms = new MemoryStream(buffer))
             {
                 ms.Position = 0;
                 var message = mavParser.ReadPacket(ms); // `mavParser` üzerinden çağır
@@ -158,7 +160,8 @@ public class MAVLinkReceiver : MonoBehaviour
         {
             baglandi.SetActive(true);
             baglanmadi.SetActive(false);
-            comptext.text = PlayerPrefs.GetString("COMPort") + " / " + baudrated.options[baudrated.value].text;
+            //comptext.text = PlayerPrefs.GetString("COMPort") + " / " + baudrated.options[baudrated.value].text;
+            comptext.text = PlayerPrefs.GetString("COMPort") + " / " + PlayerPrefs.GetString("BaudRate");
         }
         else
         {
