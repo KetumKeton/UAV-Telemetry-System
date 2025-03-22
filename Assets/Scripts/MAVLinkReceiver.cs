@@ -31,6 +31,9 @@ oztetikege@gmail.com
 //V4 MAVLink i namespace olarak dahil edildi, memorystream kaldırıldı, seri port okuması değiştirildi 
 //NOT V4 hatalı yapılmış kütüphane kullanım gereği memorystream kullanılması geekiyor. V3 e dönülmesi daha doğru V3 ten devam edilicektir.
 //V5 V3'ün devamıdır, flag1 baglantı kurulduysa false yapıldı
+
+//Kod, MIT lisansı altında geliştirilmiştir.
+
 using UnityEngine;
 using System;
 using System.IO.Ports;
