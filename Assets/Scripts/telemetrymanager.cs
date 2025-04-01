@@ -15,7 +15,7 @@ public class telemetrymanager : MonoBehaviour
 
     public TextMeshProUGUI textMeshPro2;//2.Scroll view yazısı
    //public Text logText; // UI Text objesi 
-    private string logContent = ""; // Logları saklamak için değişken
+    public string logContent = ""; // Logları saklamak için değişken
     public ScrollRect scrollRect; // Scroll View için referans
     public ScrollRect scrollRect2;  //menudeki log window
 
