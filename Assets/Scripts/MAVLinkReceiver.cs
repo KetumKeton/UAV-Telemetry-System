@@ -31,7 +31,7 @@ oztetikege@gmail.com
 //V4 MAVLink i namespace olarak dahil edildi, memorystream kaldırıldı, seri port okuması değiştirildi 
 //NOT V4 hatalı yapılmış kütüphane kullanım gereği memorystream kullanılması geekiyor. V3 e dönülmesi daha doğru V3 ten devam edilicektir.
 //V5 V3'ün devamıdır, flag1 baglantı kurulduysa false yapıldı
-
+//Mavlink Kütüphanesi All.xml olarak ayarlandı!!!
 //Kod, MIT lisansı altında geliştirilmiştir.
 
 using UnityEngine;
@@ -137,11 +137,11 @@ public class MAVLinkReceiver : MonoBehaviour
                 //Debug.Log(message.ToString());
 
                 //Debug.Log("Okunan message: " + message.ToString() + "$");
-                Debug.Log("Okunan message: " + (message != null ? message.ToString() : "null") + "$");
+                //Debug.Log("Okunan message: " + (message != null ? message.ToString() : "null") + "$");
                 if (message != null)
                 {
                     ProcessMAVLinkMessage(message);
-                    Debug.Log("ProcessMAVLinkMessage(message) calistirildi");
+                    //Debug.Log("ProcessMAVLinkMessage(message) calistirildi");
                 }
                 else{ 
                     Debug.Log("message null");
@@ -192,19 +192,27 @@ public class MAVLinkReceiver : MonoBehaviour
             case (uint)MAVLink.MAVLINK_MSG_ID.VFR_HUD:
              // var vfrHud = (MAVLink.mavlink_vfr_hud_t)message.ToStructure();
                 var vfrHud = message.ToStructure<MAVLink.mavlink_vfr_hud_t>();
-                float speed = vfrHud.groundspeed;
+                float groundspeed = vfrHud.groundspeed;
+                float airspeed = vfrHud.airspeed;
                 float altitude = vfrHud.alt;
 
-                PlayerPrefs.SetString("speed", speed.ToString("F1"));
+                PlayerPrefs.SetString("groundspeed", groundspeed.ToString("F1"));
+                PlayerPrefs.SetString("airspeed", airspeed.ToString("F1"));
                 PlayerPrefs.SetString("altitude", altitude.ToString("F1"));
+                Debug.Log("set speeds & altitude: " + groundspeed.ToString("F1") + " " + airspeed.ToString("F1") + " " + altitude.ToString("F1"));
                 break;
 
             case (uint)MAVLink.MAVLINK_MSG_ID.SYS_STATUS:
                 //var status = (MAVLink.mavlink_sys_status_t)message.ToStructure();
                 var status = message.ToStructure<MAVLink.mavlink_sys_status_t>();
-                float battery = status.voltage_battery / 1000.0f;
+                float voltage = status.voltage_battery / 1000.0f;
+                float current = status.current_battery / 1000.0f;
+                float battery = status.battery_remaining;
 
+                PlayerPrefs.SetString("voltage", voltage.ToString("F1"));
+                PlayerPrefs.SetString("current", current.ToString("F1"));
                 PlayerPrefs.SetString("battery", battery.ToString("F1"));
+                Debug.Log("set batery, voltage and current: " + voltage.ToString("F1") + " " + current.ToString("F1") + " " + battery.ToString("F1"));
                 break;
 
             case (uint)MAVLink.MAVLINK_MSG_ID.SCALED_IMU:
@@ -214,8 +222,16 @@ public class MAVLinkReceiver : MonoBehaviour
                 float accelY = imu.yacc / 1000.0f;
                 float accelZ = imu.zacc / 1000.0f;
 
-                PlayerPrefs.SetString("accel", $"İvme: X:{accelX:F1} Y:{accelY:F1} Z:{accelZ:F1}");
+                PlayerPrefs.SetString("acceleration", $"İvme: X:{accelX:F1} Y:{accelY:F1} Z:{accelZ:F1}");
+                Debug.Log("set accel: " + PlayerPrefs.GetString("acceleration"));
                 break;
+
+            case (uint)MAVLink.MAVLINK_MSG_ID.SCALED_PRESSURE:
+                var simu = message.ToStructure<MAVLink.mavlink_scaled_pressure_t>();
+                float tempature = simu.temperature;
+                PlayerPrefs.SetString("temperature", tempature.ToString("F1"));
+                Debug.Log("set temp: " + tempature.ToString("F1"));
+            break;
         }
     }
 

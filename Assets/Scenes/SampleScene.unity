@@ -1099,7 +1099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &232793069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1114,10 +1114,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1544175890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -375}
-  m_SizeDelta: {x: 230, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &232793070
 MonoBehaviour:
@@ -3410,12 +3410,12 @@ GameObject:
   - component: {fileID: 596098240}
   - component: {fileID: 596098239}
   m_Layer: 5
-  m_Name: 1 (3)
+  m_Name: temp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &596098238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3430,10 +3430,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1749344530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -375}
-  m_SizeDelta: {x: 220, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &596098239
 MonoBehaviour:
@@ -3975,7 +3975,7 @@ GameObject:
   - component: {fileID: 664212654}
   - component: {fileID: 664212653}
   m_Layer: 5
-  m_Name: 1 (2)
+  m_Name: airspeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4129,8 +4129,11 @@ MonoBehaviour:
   Baterytext: {fileID: 1920447745}
   VoltageText: {fileID: 911628368}
   CurrentText: {fileID: 976203451}
-  VelocityText: {fileID: 616085888}
+  GroundSpeedText: {fileID: 616085888}
+  AirSpeedText: {fileID: 664212653}
   AltitudeText: {fileID: 1116725836}
+  TempatureText: {fileID: 596098239}
+  AccelerationText: {fileID: 1687854323}
   Baterylimit: {fileID: 1764778461}
   Voltagehlimit: {fileID: 618645024}
   Voltagellimit: {fileID: 1607490914}
@@ -4869,7 +4872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &721753379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4884,10 +4887,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1749344530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -375}
-  m_SizeDelta: {x: 220, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &721753380
 MonoBehaviour:
@@ -5234,7 +5237,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Altitude
+  m_Text: Air Speed(m/s)
 --- !u!222 &768881721
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9829,12 +9832,12 @@ GameObject:
   - component: {fileID: 1687854324}
   - component: {fileID: 1687854323}
   m_Layer: 5
-  m_Name: 1 (4)
+  m_Name: accel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1687854322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9849,10 +9852,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1749344530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -375}
-  m_SizeDelta: {x: 220, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687854323
 MonoBehaviour:
@@ -10616,12 +10619,12 @@ GameObject:
   - component: {fileID: 1798599839}
   - component: {fileID: 1798599838}
   m_Layer: 5
-  m_Name: Altitude (3)
+  m_Name: Tempature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1798599837
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10636,10 +10639,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1544175890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -375}
-  m_SizeDelta: {x: 230, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1798599838
 MonoBehaviour:
@@ -10674,7 +10677,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Altitude
+  m_Text: Tempature
 --- !u!222 &1798599839
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12005,12 +12008,12 @@ GameObject:
   - component: {fileID: 2071269065}
   - component: {fileID: 2071269064}
   m_Layer: 5
-  m_Name: Altitude (4)
+  m_Name: Accel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2071269063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12025,10 +12028,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1544175890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -375}
-  m_SizeDelta: {x: 230, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2071269064
 MonoBehaviour:
@@ -12063,7 +12066,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Altitude
+  m_Text: Acceleration
 --- !u!222 &2071269065
 CanvasRenderer:
   m_ObjectHideFlags: 0

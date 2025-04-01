@@ -16,8 +16,13 @@ public class Limits : MonoBehaviour
     public Text Baterytext;
     public Text VoltageText;
     public Text CurrentText;
-    public Text VelocityText;
+    public Text GroundSpeedText;
+    public Text AirSpeedText;
     public Text AltitudeText;
+
+    public Text TempatureText;
+    public Text AccelerationText;
+
 
     public InputField Baterylimit;
 
@@ -97,19 +102,19 @@ public class Limits : MonoBehaviour
             CurrentText.color = Color.red;
         }
     //3
-        if (float.TryParse(VelocityText.text, out float textValueVelocity) && 
+        if (float.TryParse(GroundSpeedText.text, out float textValueVelocity) && 
             float.TryParse(Velocityllimit.text, out float minValueVelocity) &&
             float.TryParse(Velocityhlimit.text, out float maxValueVelocity)) 
         {
             if (textValueVelocity >= minValueVelocity && textValueVelocity <= maxValueVelocity)
             {
-                VelocityText.color = Color.green;
+                GroundSpeedText.color = Color.green;
                 Velocityalert = false;
             }
             else
             {
                 if(Velocityalert == false){
-                VelocityText.color = Color.red;
+                GroundSpeedText.color = Color.red;
                 Debug.Log("Hız Sınırı Aşıldı Değer:" + textValueVelocity);
                 Velocityalert = true;
                 }
@@ -117,7 +122,7 @@ public class Limits : MonoBehaviour
         }
         else
         {
-            VelocityText.color = Color.red;
+            GroundSpeedText.color = Color.red;
         }
 //4
         if (float.TryParse(Baterytext.text, out float textValueBattery) &&
@@ -167,11 +172,14 @@ public class Limits : MonoBehaviour
 
 
     
-    VelocityText.text = PlayerPrefs.GetString("speed");
+    GroundSpeedText.text = PlayerPrefs.GetString("groundspeed");
+    AirSpeedText.text = PlayerPrefs.GetString("airspeed");
     AltitudeText.text = PlayerPrefs.GetString("altitude");
     Baterytext.text = PlayerPrefs.GetString("battery");
     VoltageText.text = PlayerPrefs.GetString("voltage");
     CurrentText.text = PlayerPrefs.GetString("current");
+    TempatureText.text = PlayerPrefs.GetString("temperature");
+    AccelerationText.text = PlayerPrefs.GetString("acceleration");
 
     }
 }
